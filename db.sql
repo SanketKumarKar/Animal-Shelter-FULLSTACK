@@ -56,7 +56,8 @@ CREATE TABLE vet (
 CREATE TABLE donation (
   d_id SERIAL PRIMARY KEY,
   amt INT,
-  items TEXT
+  items TEXT,
+  don_date DATE
 );
 
 CREATE TABLE volunteer (

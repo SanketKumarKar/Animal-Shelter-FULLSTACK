@@ -1,10 +1,15 @@
-// animalRoutes.js
-// Animal routes placeholder
 import express from "express";
 import passport from "../config/passport.js";
 import pool from "../config/db.js";
 
 const router = express.Router();
+
+/*
+----------------------------------
+GET ALL ANIMALS
+GET /api/animals
+----------------------------------
+*/
 
 router.get("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
   const animals = await pool.query(
@@ -15,6 +20,13 @@ router.get("/", passport.authenticate("jwt", { session: false }), async (req, re
   );
   res.json(animals.rows);
 });
+
+/*
+----------------------------------
+ADD ANIMAL
+POST /api/animals
+----------------------------------
+*/
 
 router.post("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
   const { name, age, breed, adm_date, ad_id, stff_id } = req.body;

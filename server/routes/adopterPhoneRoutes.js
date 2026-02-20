@@ -3,6 +3,7 @@
 import express from "express";
 import passport from "../config/passport.js";
 import pool from "../config/db.js";
+import { authorizeRole } from "../middleware/roleMiddleware.js";
 
 const router = express.Router();
 
@@ -40,6 +41,7 @@ POST /api/adopter-phones
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
+  authorizeRole(["admin", "staff"]),
   async (req, res) => {
     try {
       // Extract phone number and adopter ID from request body
@@ -66,6 +68,7 @@ DELETE /api/adopter-phones/:ph/:ad_id
 router.delete(
   "/:ph/:ad_id",
   passport.authenticate("jwt", { session: false }),
+  authorizeRole(["admin", "staff"]),
   async (req, res) => {
     try {
       const { ph, ad_id } = req.params;

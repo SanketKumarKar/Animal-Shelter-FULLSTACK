@@ -1,10 +1,17 @@
 // medrecRoutes.js
-// Medical record routes placeholder
+// Medical record routes 
 import express from "express";
 import passport from "../config/passport.js";
 import pool from "../config/db.js";
 
 const router = express.Router();
+
+/*
+----------------------------------
+ADD MEDICAL RECORD
+POST /api/medrecs
+----------------------------------
+*/
 
 router.post("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
   const { vacc_det, treatment, anl_id } = req.body;

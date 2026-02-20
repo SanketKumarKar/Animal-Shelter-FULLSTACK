@@ -1,11 +1,17 @@
 // checkupRoutes.js
-// Checkup routes placeholder
+// Checkup routes 
 import express from "express";
 import passport from "../config/passport.js";
 import pool from "../config/db.js";
 
 const router = express.Router();
 
+/*
+----------------------------------
+ADD CHECKUP
+POST /api/checkups
+----------------------------------
+*/
 router.post("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
   const { symptoms, details, checkup_date, r_id } = req.body;
   const result = await pool.query(

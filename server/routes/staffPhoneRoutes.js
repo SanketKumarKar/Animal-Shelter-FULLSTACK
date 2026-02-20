@@ -1,5 +1,5 @@
 // staffPhoneRoutes.js
-// Staff phone routes placeholder
+// Staff phone routes 
 import express from "express";
 import passport from "../config/passport.js";
 import pool from "../config/db.js";

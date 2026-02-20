@@ -1,11 +1,17 @@
 // vetRoutes.js
-// Veterinarian routes placeholder
+// Veterinarian routes 
 import express from "express";
 import passport from "../config/passport.js";
 import pool from "../config/db.js";
 
 const router = express.Router();
 
+/*
+----------------------------------
+ADD VETERINARIAN
+POST /api/vets
+----------------------------------
+*/
 router.post("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
   const { name, doc_id, ph, checkup_id } = req.body;
   const result = await pool.query(
