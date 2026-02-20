@@ -3,6 +3,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import passport from "./config/passport.js";
 
 import authRoutes from "./routes/authRoutes.js";
@@ -17,7 +19,12 @@ import volunteerRoutes from "./routes/volunteerRoutes.js";
 import adopterPhoneRoutes from "./routes/adopterPhoneRoutes.js";
 import staffPhoneRoutes from "./routes/staffPhoneRoutes.js";
 
-dotenv.config();
+// Get directory name in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load environment variables from server/.env
+dotenv.config({ path: join(__dirname, '.env') });
 
 const app = express();
 

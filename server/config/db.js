@@ -1,9 +1,17 @@
 // db.js
-// Database connection setup placeholder
+// Database connection setup 
 import pg from "pg";
 import dotenv from "dotenv";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
-dotenv.config();
+// Get directory name in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load environment variables
+dotenv.config({ path: join(__dirname, '..', '.env') });
+
 const { Pool } = pg;
 const pool = new Pool({
   user: process.env.DB_USER,

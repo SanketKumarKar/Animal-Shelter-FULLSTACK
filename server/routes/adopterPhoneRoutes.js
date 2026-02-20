@@ -1,5 +1,5 @@
 // adopterPhoneRoutes.js
-// Adopter phone routes placeholder
+// Adopter phone routes for managing adopter phone numbers
 import express from "express";
 import passport from "../config/passport.js";
 import pool from "../config/db.js";
@@ -17,12 +17,13 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
+      // Retrieve all adopter phone numbers along with adopter names by joining the adopter_ph and adopter tables
       const result = await pool.query(
         `SELECT ap.ph, ap.ad_id, a.name AS adopter_name
          FROM adopter_ph ap
          JOIN adopter a ON ap.ad_id = a.ad_id`
       );
-
+      // Return the list of adopter phone numbers in the response
       res.json(result.rows);
     } catch (err) {
       res.status(500).json({ error: err.message });
@@ -41,8 +42,9 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
+      // Extract phone number and adopter ID from request body
       const { ph, ad_id } = req.body;
-
+      // Insert the new phone number for the adopter into the database and return the created record
       const result = await pool.query(
         "INSERT INTO adopter_ph (ph, ad_id) VALUES ($1,$2) RETURNING *",
         [ph, ad_id]
