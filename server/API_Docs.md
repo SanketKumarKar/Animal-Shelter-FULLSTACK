@@ -221,6 +221,7 @@ DELETE /staff-phones/:ph/:stff_id
 ```
 GET /animals
 ```
+*Includes staff_name for internal tracking.*
 
 **Response:**
 ```json
@@ -233,6 +234,27 @@ GET /animals
     "adm_date": "2025-01-15",
     "adopter_name": "Rahul Sharma",
     "staff_name": "Dr. Mehta"
+  }
+]
+```
+
+## Get Public Animals (Privacy Protected)
+**Endpoint:**
+```
+GET /animals/public
+```
+*Staff names are excluded for privacy on the landing page.*
+
+**Response:**
+```json
+[
+  {
+    "anl_id": 1,
+    "name": "Tommy",
+    "age": 3,
+    "breed": "Labrador",
+    "adm_date": "2025-01-15",
+    "adopter_name": "Rahul Sharma"
   }
 ]
 ```

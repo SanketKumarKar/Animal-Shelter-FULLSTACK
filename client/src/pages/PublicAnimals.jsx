@@ -17,7 +17,7 @@ export default function PublicAnimals() {
     useEffect(() => {
         // Fetch animals without auth for public route — if backend requires auth,
         // this will fail gracefully and show an empty state
-        API.get("/animals")
+        API.get("/animals/public")  
             .then((res) => setAnimals((res.data || []).filter((a) => !a.ad_id)))
             .catch(() => setAnimals([]))
             .finally(() => setLoading(false));

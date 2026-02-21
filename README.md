@@ -63,6 +63,7 @@ The project follows a standard RESTful architecture with JSON request/response f
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | `GET` | `/api/animals` | List all animals with attached adopter and staff names. |
+| `GET` | `/api/animals/public` | Public list for landing page (Staff names hidden for privacy). |
 | `POST` | `/api/animals` | Register a new shelter resident. |
 | `POST` | `/api/medrec` | Create a new medical history record for an animal. |
 | `POST` | `/api/checkups` | Log a medical checkup (Symptoms, Treatment, Date). |

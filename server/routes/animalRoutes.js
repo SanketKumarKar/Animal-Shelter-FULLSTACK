@@ -8,6 +8,7 @@ const router = express.Router();
 ----------------------------------
 GET ALL ANIMALS
 GET /api/animals
+staff included
 ----------------------------------
 */
 
@@ -19,6 +20,26 @@ router.get("/", passport.authenticate("jwt", { session: false }), async (req, re
      LEFT JOIN staff s ON a.stff_id = s.stff_id`
   );
   res.json(animals.rows);
+});
+
+/*
+----------------------------------
+GET PUBLIC ANIMALS (NO AUTH)
+GET /api/animals/public
+staff NOT included for privacy  
+----------------------------------
+*/
+router.get("/public", async (req, res) => {
+  try {
+    const animals = await pool.query(
+      `SELECT a.*, ad.name AS adopter_name
+       FROM animal a
+       LEFT JOIN adopter ad ON a.ad_id = ad.ad_id`
+    );
+    res.json(animals.rows);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch public animals" });
+  }
 });
 
 /*
