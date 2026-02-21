@@ -12,12 +12,26 @@ A modern, full-stack management solution for animal shelters. **PawShelter** str
 
 ## ✨ Key Features
 
--   🛡️ **Role-Based Access Control (RBAC)**: Distinct dashboards and permissions for Admins, Staff, and regular Users.
+-   🛡️ **Role-Based Access Control (RBAC)**: Distinct dashboards and permissions for Admins (Stats & Management), Staff (Limited operations), and regular Users.
 -   💹 **Live Donation Growth**: Beautifully visualized donation analytics powered by **Recharts**.
 -   📋 **Comprehensive Management**: Full CRUD operations for Animals, Adopters, Staff, and Volunteers.
 -   🏥 **Medical Tracking**: Dedicated module for medical records, checkups, and veterinarian assignments.
 -   🌓 **Premium UI/UX**: Sleek Glassmorphism components, dark/light mode, and smooth transistions using **Framer Motion**.
--   🔒 **Secure Authentication**: JWT-based security with Passport.js and encrypted passwords via Bcrypt.
+-   🔒 **Secure Authentication**: JWT-based security with Passport.js, AuthContext for state management, and protected route logic with encrypted passwords via Bcrypt.
+
+---
+
+## 🏗️ Architecture & Infrastructure
+
+### **Frontend Implementation**
+- **State Management**: React Context API (`AuthContext`, `NotificationContext`) for efficient global state without the complexity of Redux.
+- **Service Layer**: Centralized Axios configuration with request/response interceptors for seamless JWT management and unified error handling.
+- **Routing Strategy**: React Router v7 with nested, role-protected routes and automatic redirection logic.
+- **Theme System**: Custom-configured Material-UI theme for a consistent, premium aesthetic.
+
+### **Backend & Database**
+- **Relational Integrity**: Robust PostgreSQL schema managing complex relationships between Animals, Adopters, and Medical Records.
+- **Security First**: Bcrypt hash encryption and JWT-based session persistence with Passport.js.
 
 ---
 
@@ -29,8 +43,9 @@ A modern, full-stack management solution for animal shelters. **PawShelter** str
 | **Material UI (v7)** | Premium component library for high-end, responsive design. |
 | **Recharts** | Dynamic SVG-based charts for donation and adoption analytics. |
 | **Framer Motion** | Industry-standard animation library for smooth UI transitions. |
-| **Axios** | Robust HTTP client for seamless API integration. |
-| **React Router v7** | Advanced client-side routing and navigation. |
+| **Axios** | Robust HTTP client with JWT interceptor support. |
+| **React Router v7** | Advanced client-side routing and role-based protection. |
+| **jwt-decode** | Secure decoding of JWT tokens for UI state updates. |
 
 ### **Backend**
 | Library | Purpose |
@@ -92,8 +107,7 @@ The project follows a standard RESTful architecture with JSON request/response f
 Follow these steps to set up the project locally.
 
 ### Prerequisites
--   Node.js (v18+)
--   PostgreSQL installed and running
+- Node.js (v18+) & PostgreSQL
 
 ### 1. Clone & Install Dependencies
 ```bash
@@ -150,17 +164,44 @@ The app will be live at `http://localhost:5173`.
 ```text
 ├── client/              # React + Vite frontend
 │   ├── src/
-│   │   ├── components/  # Reusable UI components
-│   │   ├── pages/       # Dashboard and List views
-│   │   └── services/    # API abstraction layer
+│   │   ├── components/  # Nav, Sidebar, ProtectedRoute, Loaders
+│   │   ├── pages/       # Dashboards (Admin/Staff/User), Animal & Adopter Lists
+│   │   ├── context/     # Auth & Notification providers
+│   │   └── services/    # API abstraction & Axios interceptors
 ├── server/              # Express backend
-│   ├── routes/          # RESTful API endpoints
+│   ├── routes/          # Authentication & Resource endpoints
 │   ├── config/          # Passport & DB configurations
-│   └── middleware/      # Authentication & Role guards
+│   ├── middleware/      # Auth & Role-based guards
 │   └── API_Docs.md      # Detailed endpoint documentation
 ├── db.sql               # Database schema
 └── seed.sql             # Sample data
 ```
+
+---
+
+## 📊 Technical Highlights & Statistics
+
+- **Organized Frontend**: 21+ components, 12 pages, and 2 global context providers.
+- **Robust Security**: Role-based routing (Public: 3, Protected: 8) with token persistence.
+- **Clean Code**: Strict separation of concerns (Services, Contexts, UI).
+- **UX Excellence**: Loading states, confirmation dialogs, and real-time notifications.
+
+## ⚠️ Known Limitations
+
+-   **Animal Details**: The detailed view for individual animals is currently a placeholder and needs full implementation.
+-   **Media Uploads**: Image and document upload functionality for animals and medical records is not yet implemented.
+-   **Data Pagination**: Large data sets (animals, adopters) currently load all at once, which may impact performance as the database grows.
+-   **Advanced Search**: Lack of complex filtering and search capabilities in the list views.
+-   **Medical UI**: While backend logic exists for medical records, the frontend UI for managing them is pending.
+-   **Notifications**: Real-time updates and email notifications are not yet implemented.
+
+---
+
+## 🔜 Future Roadmap
+
+- [ ] **High Priority**: Medical records management UI, Image upload for animals.
+- [ ] **Medium Priority**: Staff management CRUD, Donation tracking UI.
+- [ ] **Low Priority**: Real-time notifications, Activity feed, and PDF Reports.
 
 ---
 
