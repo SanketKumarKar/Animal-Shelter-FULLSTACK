@@ -112,7 +112,7 @@ Follow these steps to set up the project locally.
 ### 1. Clone & Install Dependencies
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/SanketKumarKar/Animal-Shelter-FULLSTACK.git
 cd animal-shelter-fullstack
 
 # Install Server Dependencies
