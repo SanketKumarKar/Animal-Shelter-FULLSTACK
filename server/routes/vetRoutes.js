@@ -20,5 +20,21 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
   );
   res.json(result.rows[0]);
 });
+/*
+----------------------------------
+GET VETERINARIAN
+GET /api/vets
+----------------------------------
+*/
+
+router.get("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
+   try{
+    const result = await pool.query("SELECT * FROM vet ORDER BY doc_id DESC");
+    res.json(result.rows);
+  }
+  catch (err) {
+    res.status(500).json({ error: "Failed to fetch vet details" });
+  }
+});
 
 export default router;
