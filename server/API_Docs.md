@@ -122,10 +122,43 @@ POST /adopters
 }
 ```
 
+**Response (201 Created):**
+```json
+{
+  "ad_id": 1,
+  "name": "Rahul Sharma",
+  "address": "Delhi"
+}
+```
+
+**Request Body:**
+```json
+{
+  "name": "Rahul Sharma",
+  "address": "South Delhi"
+}
+```
+
+**Response (200 OK):**
+```json
+{
+  "ad_id": 1,
+  "name": "Rahul Sharma",
+  "address": "South Delhi"
+}
+```
+
 ## Delete Adopter
 **Endpoint:**
 ```
 DELETE /adopters/:id
+```
+
+**Response (200 OK):**
+```json
+{
+  "message": "Adopter deleted"
+}
 ```
 
 ---
@@ -146,16 +179,42 @@ POST /adopter-phones
 }
 ```
 
+**Response (201 Created):**
+```json
+{
+  "ph": "9876543210",
+  "ad_id": 1
+}
+```
+
 ## Get All Phones
 **Endpoint:**
 ```
 GET /adopter-phones
 ```
 
+**Response (200 OK):**
+```json
+[
+  {
+    "ph": "9876543210",
+    "ad_id": 1,
+    "adopter_name": "Rahul Sharma"
+  }
+]
+```
+
 ## Delete Phone
 **Endpoint:**
 ```
 DELETE /adopter-phones/:ph/:ad_id
+```
+
+**Response (200 OK):**
+```json
+{
+  "message": "Adopter phone deleted"
+}
 ```
 
 ---
@@ -166,6 +225,17 @@ DELETE /adopter-phones/:ph/:ad_id
 **Endpoint:**
 ```
 GET /staff
+```
+
+**Response (200 OK):**
+```json
+[
+  {
+    "stff_id": 1,
+    "name": "Dr. Mehta",
+    "role": "Caretaker"
+  }
+]
 ```
 
 ## Create Staff
@@ -179,6 +249,51 @@ POST /staff
 {
   "name": "Dr. Mehta",
   "role": "Caretaker"
+}
+```
+
+**Response (201 Created):**
+```json
+{
+  "stff_id": 1,
+  "name": "Dr. Mehta",
+  "role": "Caretaker"
+}
+```
+
+## Update Staff
+**Endpoint:**
+```
+PUT /staff/:id
+```
+
+**Request Body:**
+```json
+{
+  "name": "Dr. Anil Mehta",
+  "role": "Senior Caretaker"
+}
+```
+
+**Response (200 OK):**
+```json
+{
+  "stff_id": 1,
+  "name": "Dr. Anil Mehta",
+  "role": "Senior Caretaker"
+}
+```
+
+## Delete Staff
+**Endpoint:**
+```
+DELETE /staff/:id
+```
+
+**Response (200 OK):**
+```json
+{
+  "message": "Staff deleted"
 }
 ```
 
@@ -200,16 +315,42 @@ POST /staff-phones
 }
 ```
 
+**Response (201 Created):**
+```json
+{
+  "ph": "9123456780",
+  "stff_id": 1
+}
+```
+
 ## Get Staff Phones
 **Endpoint:**
 ```
 GET /staff-phones
 ```
 
+**Response (200 OK):**
+```json
+[
+  {
+    "ph": "9123456780",
+    "stff_id": 1,
+    "staff_name": "Dr. Mehta"
+  }
+]
+```
+
 ## Delete Staff Phone
 **Endpoint:**
 ```
 DELETE /staff-phones/:ph/:stff_id
+```
+
+**Response (200 OK):**
+```json
+{
+  "message": "Staff phone deleted"
+}
 ```
 
 ---
@@ -277,6 +418,19 @@ POST /animals
 }
 ```
 
+**Response (201 Created):**
+```json
+{
+  "anl_id": 1,
+  "name": "Tommy",
+  "age": 3,
+  "breed": "Labrador",
+  "adm_date": "2025-01-15",
+  "ad_id": 1,
+  "stff_id": 1
+}
+```
+
 ---
 
 # 🏥 MEDICAL RECORD MODULE
@@ -296,11 +450,35 @@ POST /medrec
 }
 ```
 
+**Response (201 Created):**
+```json
+{
+  "r_id": 1,
+  "vacc_det": "Rabies Vaccine",
+  "treatment": "General Checkup",
+  "anl_id": 1
+}
+```
+
 ## Get Medical Records
 **Endpoint:**
 ```
 GET /medrec
 ```
+
+**Response (200 OK):**
+```json
+[
+  {
+    "r_id": 1,
+    "vacc_det": "Rabies Vaccine",
+    "treatment": "General Checkup",
+    "anl_id": 1
+  }
+]
+```
+
+---
 
 ---
 
@@ -315,6 +493,17 @@ POST /checkups
 **Request Body:**
 ```json
 {
+  "symptoms": "Fever",
+  "details": "Mild infection",
+  "checkup_date": "2025-02-01",
+  "r_id": 1
+}
+```
+
+**Response (201 Created):**
+```json
+{
+  "id": 1,
   "symptoms": "Fever",
   "details": "Mild infection",
   "checkup_date": "2025-02-01",
@@ -342,6 +531,35 @@ POST /vets
 }
 ```
 
+**Response (201 Created):**
+```json
+{
+  "id": 1,
+  "name": "Dr. Singh",
+  "doc_id": "DOC123",
+  "ph": "9999999999",
+  "checkup_id": 1
+}
+```
+
+## Get All Vets
+**Endpoint:**
+```
+GET /vets
+```
+
+**Response:**
+```json
+[
+  {
+    "name": "Dr. Singh",
+    "doc_id": "DOC123",
+    "ph": "9999999999",
+    "checkup_id": 1
+  }
+]
+```
+
 ---
 
 # 💰 DONATION MODULE
@@ -350,6 +568,18 @@ POST /vets
 **Endpoint:**
 ```
 GET /donations
+```
+
+**Response (200 OK):**
+```json
+[
+  {
+    "d_id": 1,
+    "amt": 5000,
+    "items": "Dog Food",
+    "don_date": "2025-02-23"
+  }
+]
 ```
 
 ## Create Donation
@@ -366,9 +596,55 @@ POST /donations
 }
 ```
 
+**Response (201 Created):**
+```json
+{
+  "d_id": 1,
+  "amt": 5000,
+  "items": "Dog Food",
+  "don_date": "2025-02-23"
+}
+```
+
+## Get Donations Growth
+**Endpoint:**
+```
+GET /donations/growth
+```
+
+**Response (200 OK):**
+```json
+[
+  {
+    "month": "Feb 2025",
+    "year": 2025,
+    "month_num": 2,
+    "amount": 5000
+  }
+]
+```
+
 ---
 
 # 🤝 VOLUNTEER MODULE
+
+## Get All Volunteers
+**Endpoint:**
+```
+GET /volunteers
+```
+
+**Response (200 OK):**
+```json
+[
+  {
+    "v_id": 1,
+    "name": "Amit",
+    "role": "Helper",
+    "d_id": 1
+  }
+]
+```
 
 ## Add Volunteer
 **Endpoint:**
@@ -382,6 +658,54 @@ POST /volunteers
   "name": "Amit",
   "role": "Helper",
   "d_id": 1
+}
+```
+
+**Response (201 Created):**
+```json
+{
+  "v_id": 1,
+  "name": "Amit",
+  "role": "Helper",
+  "d_id": 1
+}
+```
+
+## Update Volunteer
+**Endpoint:**
+```
+PUT /volunteers/:id
+```
+
+**Request Body:**
+```json
+{
+  "name": "Amit Kumar",
+  "role": "Senior Helper",
+  "d_id": 1
+}
+```
+
+**Response (200 OK):**
+```json
+{
+  "v_id": 1,
+  "name": "Amit Kumar",
+  "role": "Senior Helper",
+  "d_id": 1
+}
+```
+
+## Delete Volunteer
+**Endpoint:**
+```
+DELETE /volunteers/:id
+```
+
+**Response (200 OK):**
+```json
+{
+  "message": "Volunteer deleted"
 }
 ```
 

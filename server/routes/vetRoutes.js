@@ -22,13 +22,13 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
 });
 /*
 ----------------------------------
-GET VETERINARIAN
+GET ALL VETERINARIANS
 GET /api/vets
 ----------------------------------
 */
 
 router.get("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
-   try{
+  try {
     const result = await pool.query("SELECT * FROM vet ORDER BY doc_id DESC");
     res.json(result.rows);
   }

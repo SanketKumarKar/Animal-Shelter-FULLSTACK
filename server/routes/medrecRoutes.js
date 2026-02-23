@@ -9,7 +9,7 @@ const router = express.Router();
 /*
 ----------------------------------
 ADD MEDICAL RECORD
-POST /api/medrecs
+POST /api/medrec
 ----------------------------------
 */
 
@@ -22,6 +22,12 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
   res.json(result.rows[0]);
 });
 
+/*
+----------------------------------
+GET ALL MEDICAL RECORDS
+GET /api/medrec
+----------------------------------
+*/
 router.get("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
   const result = await pool.query("SELECT * FROM medrec");
   res.json(result.rows);

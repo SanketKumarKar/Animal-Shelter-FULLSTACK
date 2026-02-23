@@ -80,8 +80,10 @@ The project follows a standard RESTful architecture with JSON request/response f
 | `GET` | `/api/animals` | List all animals with attached adopter and staff names. |
 | `GET` | `/api/animals/public` | Public list for landing page (Staff names hidden for privacy). |
 | `POST` | `/api/animals` | Register a new shelter resident. |
+| `GET` | `/api/medrec` | Retrieve all medical history records. |
 | `POST` | `/api/medrec` | Create a new medical history record for an animal. |
 | `POST` | `/api/checkups` | Log a medical checkup (Symptoms, Treatment, Date). |
+| `GET` | `/api/vets` | List all assigned veterinarian details. |
 | `POST` | `/api/vets` | Assign a veterinarian to a specific checkup session. |
 
 ### **🧍 Adopters & Volunteers**
@@ -91,7 +93,14 @@ The project follows a standard RESTful architecture with JSON request/response f
 | `POST` | `/api/adopters` | Add a new adopter profile (Restricted: Admin/Staff). |
 | `PUT` | `/api/adopters/:id` | Update existing adopter information (Restricted: Admin/Staff). |
 | `POST` | `/api/adopter-phones` | Linked multiple contact numbers to an adopter. |
+| `GET` | `/api/staff` | View all shelter staff members and their roles. |
+| `POST` | `/api/staff` | Register new staff (Restricted: Admin). |
+| `PUT` | `/api/staff/:id` | Update staff details (Restricted: Admin). |
+| `DELETE` | `/api/staff/:id` | Remove staff record (Restricted: Admin). |
 | `GET` | `/api/volunteers` | View active volunteers and their assigned roles. |
+| `POST` | `/api/volunteers` | Register a new volunteer. |
+| `PUT` | `/api/volunteers/:id` | Update volunteer assignments. |
+| `DELETE` | `/api/volunteers/:id` | Remove volunteer from the system. |
 
 ### **💰 Donations**
 | Method | Endpoint | Description |
