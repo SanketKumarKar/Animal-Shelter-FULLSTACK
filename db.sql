@@ -1,5 +1,7 @@
 --this file contains tne SQL Commands as per PostgreSQL.
+-- It creates the tables for the animal shelter management system, including users, adopters, staff, animals, medical records, checkups, vets, donations, volunteers, and phone numbers for adopters and staff.
 
+--Users Table
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100),
@@ -8,18 +10,21 @@ CREATE TABLE users (
   role VARCHAR(20) DEFAULT 'staff'
 );
 
+--Adopter Table
 CREATE TABLE adopter (
   ad_id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   address TEXT NOT NULL
 );
 
+--Staff Table
 CREATE TABLE staff (
   stff_id SERIAL PRIMARY KEY,
   name VARCHAR(100),
   role VARCHAR(50)
 );
 
+--Animal Table
 CREATE TABLE animal (
   anl_id SERIAL PRIMARY KEY,
   name VARCHAR(100),
@@ -30,6 +35,7 @@ CREATE TABLE animal (
   stff_id INT REFERENCES staff(stff_id)
 );
 
+--Medical Record Table
 CREATE TABLE medrec (
   r_id SERIAL PRIMARY KEY,
   vacc_det TEXT,
@@ -37,6 +43,7 @@ CREATE TABLE medrec (
   anl_id INT REFERENCES animal(anl_id) ON DELETE CASCADE
 );
 
+--Checkup Table
 CREATE TABLE checkup (
   id SERIAL PRIMARY KEY,
   symptoms TEXT,
@@ -45,6 +52,7 @@ CREATE TABLE checkup (
   r_id INT REFERENCES medrec(r_id) ON DELETE CASCADE
 );
 
+--Vet Table
 CREATE TABLE vet (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100),
@@ -53,6 +61,7 @@ CREATE TABLE vet (
   checkup_id INT REFERENCES checkup(id)
 );
 
+--Donation Table
 CREATE TABLE donation (
   d_id SERIAL PRIMARY KEY,
   amt INT,
@@ -60,6 +69,7 @@ CREATE TABLE donation (
   don_date DATE
 );
 
+--Volunteer Table
 CREATE TABLE volunteer (
   v_id SERIAL PRIMARY KEY,
   name VARCHAR(100),
@@ -67,6 +77,7 @@ CREATE TABLE volunteer (
   d_id INT REFERENCES donation(d_id)
 );
 
+--Phone numbers for adopters and staff
 CREATE TABLE adopter_ph (
   ph VARCHAR(15),
   ad_id INT REFERENCES adopter(ad_id) ON DELETE CASCADE,
